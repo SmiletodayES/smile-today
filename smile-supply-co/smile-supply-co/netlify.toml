@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Keeps script.js's existing fetch("/api/...") calls working unchanged —
+# Netlify Functions normally live at /.netlify/functions/<name>.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

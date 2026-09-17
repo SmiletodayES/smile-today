@@ -1,0 +1,337 @@
+:root {
+  --cream: #FBF3E7;
+  --ink: #17140F;
+  --sunset: #FF6B3D;
+  --sunset-dark: #E85A2C;
+  --sand: #E7D9BF;
+  --sage: #8FA98A;
+  --white: #FFFFFF;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --shadow: 0 6px 0 var(--ink);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, .hand, .wordmark {
+  font-family: "Montserrat", "Inter", sans-serif;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+a { color: inherit; }
+
+.hidden { display: none !important; }
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordmark {
+  font-size: 1rem;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 3px solid var(--sunset);
+  padding-bottom: 2px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  max-width: 720px;
+  margin: 40px auto 70px;
+  padding: 0 28px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+  margin: 0 0 18px;
+  color: var(--ink);
+}
+
+.hero p {
+  font-size: 1.15rem;
+  max-width: 480px;
+  margin: 0 auto 30px;
+  opacity: 0.85;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+
+.btn-primary {
+  background: var(--sunset);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.btn-block { width: 100%; text-align: center; }
+
+/* ---------- Shop grid ---------- */
+.shop-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+@media (max-width: 780px) {
+  .shop-grid { grid-template-columns: 1fr; }
+}
+
+.loading { text-align: center; grid-column: 1 / -1; opacity: 0.6; }
+
+.product-card {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.product-card:hover { transform: translateY(-4px); }
+
+.product-art {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.product-art.bg-1 { background: var(--sand); }
+.product-art.bg-2 { background: #FBD9C4; }
+.product-art.bg-3 { background: var(--sage); }
+
+.product-art svg { width: 62%; height: 62%; }
+.product-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+.product-card h3 {
+  margin: 0 0 4px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.product-card .price {
+  font-weight: 700;
+  color: var(--sunset-dark);
+  margin: 0 0 6px;
+}
+
+.product-card .tagline {
+  margin: 0;
+  font-size: 0.92rem;
+  opacity: 0.75;
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 20, 15, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-lg);
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+@media (max-width: 640px) {
+  .modal { grid-template-columns: 1fr; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.modal-image {
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  min-height: 220px;
+}
+
+.modal-image svg { width: 70%; height: 70%; }
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-body {
+  padding: 26px 26px 24px;
+}
+
+.modal-body h2 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+  color: var(--sunset-dark);
+}
+
+.modal-body .tagline {
+  margin: 0 0 10px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.modal-body .description {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.option-group { margin-bottom: 16px; }
+
+.option-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.pill.selected {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 4px 6px;
+}
+
+.qty-control button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--sand);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#modal-price { font-weight: 800; }
+
+.error {
+  color: #B3261E;
+  font-size: 0.88rem;
+  margin-top: 10px;
+}
+
+.fineprint {
+  font-size: 0.78rem;
+  opacity: 0.55;
+  margin-top: 14px;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  text-align: center;
+  padding: 30px 20px 50px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
