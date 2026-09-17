@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smile Supply Co.</title>
+<meta name="description" content="Hoodies, tees and caps from Smile Supply Co. — don't forget to smile today." />
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <svg class="smiley" viewBox="0 0 100 60" width="46" height="28" aria-hidden="true">
+      <g fill="none" stroke="#17140F" stroke-width="7" stroke-linecap="round">
+        <rect x="30" y="4" width="10" height="12" rx="4" fill="#17140F" stroke="none"/>
+        <rect x="60" y="4" width="10" height="12" rx="4" fill="#17140F" stroke="none"/>
+        <path d="M22,28 Q50,54 78,28" />
+      </g>
+    </svg>
+    <span class="wordmark">Smile Supply Co.</span>
+  </div>
+  <nav>
+    <a href="#shop">Shop</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Don't forget<br>to smile today</h1>
+  <p>Hoodies, tees &amp; caps made to feel like sunshine. Printed fresh and shipped straight to your door.</p>
+  <a href="#shop" class="btn btn-primary">Shop the drop ↓</a>
+</section>
+
+<section id="shop" class="shop-grid">
+  <p class="loading">Loading the good stuff…</p>
+</section>
+
+<div id="product-modal" class="modal-overlay hidden" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <button class="modal-close" type="button" aria-label="Close">×</button>
+    <div class="modal-image" id="modal-image"></div>
+    <div class="modal-body">
+      <h2 id="modal-name"></h2>
+      <p id="modal-tagline" class="tagline"></p>
+      <p id="modal-description" class="description"></p>
+
+      <div class="option-group">
+        <label>Colour</label>
+        <div id="modal-colors" class="pill-group"></div>
+      </div>
+
+      <div class="option-group">
+        <label>Size</label>
+        <div id="modal-sizes" class="pill-group"></div>
+      </div>
+
+      <div class="option-group qty-group">
+        <label>Qty</label>
+        <div class="qty-control">
+          <button id="qty-minus" type="button" aria-label="Decrease quantity">−</button>
+          <span id="qty-value">1</span>
+          <button id="qty-plus" type="button" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <button id="checkout-btn" class="btn btn-primary btn-block" type="button">
+        Checkout — <span id="modal-price"></span>
+      </button>
+      <p id="modal-error" class="error hidden"></p>
+      <p class="fineprint">Secure checkout by Stripe. Printed on demand and shipped by Printify.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Smile Supply Co. · Ships from Spain · Payments secured by Stripe</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
