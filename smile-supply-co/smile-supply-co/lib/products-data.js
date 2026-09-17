@@ -1,23 +1,12 @@
 /**
  * Single source of truth for the product catalog.
  *
- * IMPORTANT — placeholders you must replace before going live:
- *   - printifyProductId  (one per product)
- *   - printifyVariantId  (one per color/size combination)
- *
- * How to find the real values:
- *   1. In Printify, create/upload the product (choose a blueprint + print
- *      provider, add your design, pick the colors/sizes you want to sell,
- *      publish it to "My stores" so it belongs to your shop).
- *   2. Call GET https://api.printify.com/v1/shops/{shop_id}/products.json
- *      (with your API token) to get the product's numeric "id" ->
- *      that's printifyProductId.
- *   3. In that same product's JSON, the "variants" array lists every
- *      color/size combination with its own numeric "id" -> that's
- *      printifyVariantId. Match by the variant's "title" (e.g. "Black / M").
+ * These are the REAL Printify product + variant IDs for the Smile Supply
+ * Co. shop (pulled via the debug-catalog helper — see README). If you add
+ * more colors/sizes in Printify later, add them here too (and to the
+ * `variantIds` map) or the site won't know about them.
  *
  * priceCents is what the CUSTOMER pays via Stripe, in euro cents.
- * Set it to (Printify's cost to you) + shipping + your margin.
  */
 
 const PRODUCTS = {
@@ -28,10 +17,20 @@ const PRODUCTS = {
     description:
       "Our signature hoodie: relaxed fit, brushed-fleece interior, and the Smile Supply Co. logo printed on the chest. Built for beach mornings and cold nights.",
     image: "smile-hoodie",
-    priceCents: 4500,
-    printifyProductId: "REPLACE_PRODUCT_ID__hoodie",
-    colors: ["Black", "Sand", "Sunset Orange"],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    priceCents: 3500,
+    printifyProductId: "6aac0f056b428027980c863a",
+    colors: ["White"],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
+    variantIds: {
+      "White-S": 32910,
+      "White-M": 32911,
+      "White-L": 32912,
+      "White-XL": 32913,
+      "White-2XL": 32914,
+      "White-3XL": 32915,
+      "White-4XL": 32916,
+      "White-5XL": 32917,
+    },
   },
   tshirt: {
     id: "tshirt",
@@ -40,10 +39,18 @@ const PRODUCTS = {
     description:
       "A everyday cotton tee with the hand-drawn smiley on the front. Light, breathable, made to be lived in.",
     image: "smile-tee",
-    priceCents: 2500,
-    printifyProductId: "REPLACE_PRODUCT_ID__tshirt",
-    colors: ["Black", "Sand", "Sunset Orange"],
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    priceCents: 1999,
+    printifyProductId: "6aac13bbfab3e89cfa0e2f43",
+    colors: ["White"],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+    variantIds: {
+      "White-S": 93739,
+      "White-M": 93740,
+      "White-L": 93741,
+      "White-XL": 93742,
+      "White-2XL": 93743,
+      "White-3XL": 93744,
+    },
   },
   cap: {
     id: "cap",
@@ -52,24 +59,21 @@ const PRODUCTS = {
     description:
       "A low-profile dad cap with an embroidered-look smiley and an adjustable strap for an easy fit.",
     image: "smile-cap",
-    priceCents: 2200,
-    printifyProductId: "REPLACE_PRODUCT_ID__cap",
-    colors: ["Black", "Sand", "Sunset Orange"],
-    sizes: ["One Size"],
+    priceCents: 1999,
+    printifyProductId: "6aac122ba53e7ba0bb03d46a",
+    colors: ["White"],
+    sizes: ["One size"],
+    variantIds: {
+      "White-One size": 82434,
+    },
   },
 };
-
-// Builds a placeholder variant id that's easy to find-and-replace,
-// e.g. REPLACE_VARIANT_ID__hoodie__Black__M
-function variantPlaceholder(productId, color, size) {
-  return `REPLACE_VARIANT_ID__${productId}__${color.replace(/\s+/g, "_")}__${size.replace(/\s+/g, "_")}`;
-}
 
 function getVariantId(productId, color, size) {
   const product = PRODUCTS[productId];
   if (!product) return null;
   if (!product.colors.includes(color) || !product.sizes.includes(size)) return null;
-  return variantPlaceholder(productId, color, size);
+  return product.variantIds[`${color}-${size}`] || null;
 }
 
 // Sanitized catalog for the public-facing /api/products endpoint —
@@ -87,4 +91,4 @@ function getPublicCatalog() {
   }));
 }
 
-module.exports = { PRODUCTS, getVariantId, getPublicCatalog, variantPlaceholder };
+module.exports = { PRODUCTS, getVariantId, getPublicCatalog };
