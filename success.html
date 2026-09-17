@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank you! — Smile Supply Co.</title>
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <svg class="smiley" viewBox="0 0 100 60" width="46" height="28" aria-hidden="true">
+        <g fill="none" stroke="#17140F" stroke-width="7" stroke-linecap="round">
+          <rect x="30" y="4" width="10" height="12" rx="4" fill="#17140F" stroke="none"/>
+          <rect x="60" y="4" width="10" height="12" rx="4" fill="#17140F" stroke="none"/>
+          <path d="M22,28 Q50,54 78,28" />
+        </g>
+      </svg>
+      <span class="wordmark">Smile Supply Co.</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>you're all set</h1>
+    <p>Thanks for your order! A confirmation is on its way to your email. Your piece is printed on demand,
+       so please allow a little extra time before it ships — you'll get a tracking notification once it's on its way.</p>
+    <a href="/index.html" class="btn btn-primary">Back to the shop</a>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Smile Supply Co.</p>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
